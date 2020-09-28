@@ -1,36 +1,18 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-        @livewireStyles
-
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
-    </head>
-    <body class="font-sans antialiased">
+<x-base-layout>
+ <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
+                {{-- @yield('content') --}}
                 {{ $slot }}
             </main>
         </div>
@@ -38,5 +20,13 @@
         @stack('modals')
 
         @livewireScripts
+         <!-- BEGIN: JS Assets-->
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=['your-google-map-api']&libraries=places"></script>
+        <script src="{{ mix('dist/js/app.js') }}"></script>
+
+        @yield('scripts')
+        <!-- END: JS Assets-->
     </body>
-</html>
+</x-base-layout>
+
